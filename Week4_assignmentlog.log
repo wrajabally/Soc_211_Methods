@@ -1,0 +1,1715 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/waleed/Desktop/Soc_211_Methods/Week4_assignmentlog.log
+  log type:  text
+ opened on:  17 Feb 2020, 14:23:58
+
+. import excel "/Users/waleed/Documents/NBA Stats.xlsx", firstrow clear
+(26 vars, 30 obs)
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . drop Season Rk Lg G W L MP FG FGA P PA N O FT FTA ORB TRB AST PF
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. findit plotplain
+
+Search of official help files, FAQs, Examples, and Stata Journals
+-----------------------------------------------------------------
+
+Search of web resources from Stata and other users
+--------------------------------------------------
+
+(contacting http://www.stata.com)
+
+3 packages found (Stata Journal and STB listed first)
+-----------------------------------------------------
+
+gr0070 from http://www.stata-journal.com/software/sj17-3
+    SJ17-3 gr0070. Provide graph schemes sensitive to color vision deficiency
+    / Provide graph schemes sensitive to color vision / deficiency / by Daniel
+    Bischof, Department of Political / Science, University of Zurich, Zurich,
+    / Switzerland / Support:  bischof@ipz.uzh.ch / After installation, type
+
+blindschemes from http://fmwww.bc.edu/RePEc/bocode/b
+    'BLINDSCHEMES': module to provide graph schemes sensitive to color vision
+    deficiency / While Stata's computational capabilities have intensively /
+    increased over the last decade, the quality of its default figure /
+    schemes is still a matter of debate amongst users. Clearly some / of the
+
+blindschemes_fix from http://digital.cgdev.org/doc/stata/MO/Misc
+    'BLINDSCHEMES_fix': First install Bischoff's "blindschemes". Then install
+    this to fix it. / Daniel Bischof's module "blindschemes" is a valuable
+    contribution / to the collection of available Stata graph schemes.  /
+    Download the "blindschemes" package of four schemes from inside Stata / by
+
+
+(end of search)
+
+. ssc install blindschemes
+checking blindschemes consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. describe
+
+Contains data
+  obs:            30                          
+ vars:             7                          
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Tm              str4    %9s                   Tm
+WL              double  %10.0g                W/L%
+DRB             double  %10.0g                DRB
+STL             double  %10.0g                STL
+BLK             double  %10.0g                BLK
+TOV             double  %10.0g                TOV
+PTS             double  %10.0g                PTS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. tab WL, nol sort
+
+       W/L% |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       .402 |          3       10.00       10.00
+       .476 |          3       10.00       20.00
+       .585 |          3       10.00       30.00
+       .232 |          2        6.67       36.67
+       .512 |          2        6.67       43.33
+       .598 |          2        6.67       50.00
+       .646 |          2        6.67       56.67
+       .207 |          1        3.33       60.00
+       .268 |          1        3.33       63.33
+       .354 |          1        3.33       66.67
+        .39 |          1        3.33       70.00
+       .439 |          1        3.33       73.33
+       .451 |          1        3.33       76.67
+         .5 |          1        3.33       80.00
+        .61 |          1        3.33       83.33
+       .622 |          1        3.33       86.67
+       .659 |          1        3.33       90.00
+       .695 |          1        3.33       93.33
+       .707 |          1        3.33       96.67
+       .732 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. tab DRB, nol sort
+
+        DRB |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       31.9 |          2        6.67        6.67
+       34.5 |          2        6.67       13.33
+       35.5 |          2        6.67       20.00
+       35.6 |          2        6.67       26.67
+       36.2 |          2        6.67       33.33
+       36.4 |          2        6.67       40.00
+       31.3 |          1        3.33       43.33
+       32.7 |          1        3.33       46.67
+         33 |          1        3.33       50.00
+       33.5 |          1        3.33       53.33
+       33.6 |          1        3.33       56.67
+       33.7 |          1        3.33       60.00
+       33.9 |          1        3.33       63.33
+       34.1 |          1        3.33       66.67
+       34.3 |          1        3.33       70.00
+       34.4 |          1        3.33       73.33
+       34.7 |          1        3.33       76.67
+       35.1 |          1        3.33       80.00
+       35.2 |          1        3.33       83.33
+       35.4 |          1        3.33       86.67
+       35.8 |          1        3.33       90.00
+       36.5 |          1        3.33       93.33
+       36.9 |          1        3.33       96.67
+       40.4 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. tab STL, nol sort
+
+        STL |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        8.3 |          5       16.67       16.67
+        7.4 |          3       10.00       26.67
+        6.5 |          2        6.67       33.33
+        6.6 |          2        6.67       40.00
+        6.8 |          2        6.67       46.67
+        7.5 |          2        6.67       53.33
+        7.6 |          2        6.67       60.00
+        6.1 |          1        3.33       63.33
+        6.7 |          1        3.33       66.67
+        6.9 |          1        3.33       70.00
+        7.2 |          1        3.33       73.33
+        7.7 |          1        3.33       76.67
+        8.1 |          1        3.33       80.00
+        8.2 |          1        3.33       83.33
+        8.5 |          1        3.33       86.67
+        8.6 |          1        3.33       90.00
+        8.7 |          1        3.33       93.33
+          9 |          1        3.33       96.67
+        9.3 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. tab BLK, nol sort
+
+        BLK |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        4.9 |          3       10.00       10.00
+        5.1 |          3       10.00       20.00
+        5.3 |          3       10.00       30.00
+        5.4 |          3       10.00       40.00
+        4.3 |          2        6.67       46.67
+        4.4 |          2        6.67       53.33
+        4.7 |          2        6.67       60.00
+          5 |          2        6.67       66.67
+        5.5 |          2        6.67       73.33
+        5.9 |          2        6.67       80.00
+        2.4 |          1        3.33       83.33
+          4 |          1        3.33       86.67
+        4.1 |          1        3.33       90.00
+        4.6 |          1        3.33       93.33
+        5.2 |          1        3.33       96.67
+        6.4 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. tab TOV, nol sort
+
+        TOV |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         14 |          4       13.33       13.33
+       13.4 |          2        6.67       20.00
+       13.8 |          2        6.67       26.67
+       14.1 |          2        6.67       33.33
+       15.1 |          2        6.67       40.00
+       12.1 |          1        3.33       43.33
+       12.2 |          1        3.33       46.67
+       12.8 |          1        3.33       50.00
+       13.1 |          1        3.33       53.33
+       13.2 |          1        3.33       56.67
+       13.3 |          1        3.33       60.00
+       13.5 |          1        3.33       63.33
+       13.7 |          1        3.33       66.67
+       13.9 |          1        3.33       70.00
+       14.2 |          1        3.33       73.33
+       14.3 |          1        3.33       76.67
+       14.5 |          1        3.33       80.00
+       14.7 |          1        3.33       83.33
+       14.8 |          1        3.33       86.67
+       14.9 |          1        3.33       90.00
+       15.6 |          1        3.33       93.33
+       15.7 |          1        3.33       96.67
+         17 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. tab PTS, nol sort
+
+        PTS |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      110.7 |          2        6.67        6.67
+      111.7 |          2        6.67       13.33
+      103.5 |          1        3.33       16.67
+      104.5 |          1        3.33       20.00
+      104.6 |          1        3.33       23.33
+      104.9 |          1        3.33       26.67
+      105.7 |          1        3.33       30.00
+        107 |          1        3.33       33.33
+      107.3 |          1        3.33       36.67
+      107.5 |          1        3.33       40.00
+        108 |          1        3.33       43.33
+      108.9 |          1        3.33       46.67
+      111.8 |          1        3.33       50.00
+      112.2 |          1        3.33       53.33
+      112.4 |          1        3.33       56.67
+      112.5 |          1        3.33       60.00
+      113.3 |          1        3.33       63.33
+      113.9 |          1        3.33       66.67
+        114 |          1        3.33       70.00
+      114.2 |          1        3.33       73.33
+      114.4 |          1        3.33       76.67
+      114.5 |          1        3.33       80.00
+      114.7 |          1        3.33       83.33
+      115.1 |          1        3.33       86.67
+      115.2 |          1        3.33       90.00
+      115.4 |          1        3.33       93.33
+      117.7 |          1        3.33       96.67
+      118.1 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. sum
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+          Tm |          0
+          WL |         30    .4999667     .146707       .207       .732
+         DRB |         30    34.82333    1.805296       31.3       40.4
+         STL |         30    7.623333    .8402312        6.1        9.3
+         BLK |         30    4.946667    .7300134        2.4        6.4
+-------------+---------------------------------------------------------
+         TOV |         30    14.07667    1.024084       12.1         17
+         PTS |         30    111.2033     4.09318      103.5      118.1
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . _StataKernelHead WL DRB STL BLK TOV PTS using /Users/waleed/.stata_kernel_cache/data_head.csv , n_default(10)
+
+     +----------------------------------------+
+     |   WL    DRB   STL   BLK    TOV     PTS |
+     |----------------------------------------|
+  1. | .354   34.5   8.2   5.1     17   113.3 |
+  2. | .732   40.4   7.5   5.9   13.9   118.1 |
+  3. | .439   33.5   8.3     5   13.1   112.5 |
+  4. | .402   36.2   7.4   5.4   14.8   115.4 |
+  5. | .207   34.3   6.8   5.1     14   104.6 |
+     |----------------------------------------|
+  6. | .598   35.5   9.3   5.2     14   114.5 |
+  7. | .512   35.4   6.6   5.4   13.2   107.3 |
+  8. | .622   36.9   7.4   5.3   14.9   115.2 |
+  9. | .232   31.3     9   5.1   15.6   107.5 |
+ 10. | .646   36.2   6.7     5   13.8   114.7 |
+     +----------------------------------------+
+
+. _StataKernelHead Tm WL DRB STL BLK TOV PTS using /Users/waleed/.stata_kernel_cache/data_head.csv , n_default(10)
+
+     +-----------------------------------------------+
+     |   Tm     WL    DRB   STL   BLK    TOV     PTS |
+     |-----------------------------------------------|
+  1. |  ATL   .354   34.5   8.2   5.1     17   113.3 |
+  2. | MIL*   .732   40.4   7.5   5.9   13.9   118.1 |
+  3. |  MIN   .439   33.5   8.3     5   13.1   112.5 |
+  4. |  NOP   .402   36.2   7.4   5.4   14.8   115.4 |
+  5. |  NYK   .207   34.3   6.8   5.1     14   104.6 |
+     |-----------------------------------------------|
+  6. | OKC*   .598   35.5   9.3   5.2     14   114.5 |
+  7. | ORL*   .512   35.4   6.6   5.4   13.2   107.3 |
+  8. | PHI*   .622   36.9   7.4   5.3   14.9   115.2 |
+  9. |  PHO   .232   31.3     9   5.1   15.6   107.5 |
+ 10. | POR*   .646   36.2   6.7     5   13.8   114.7 |
+     +-----------------------------------------------+
+
+. _StataKernelTail Tm WL DRB STL BLK TOV PTS using /Users/waleed/.stata_kernel_cache/data_tail.csv
+
+     +-----------------------------------------------+
+     |   Tm     WL    DRB   STL   BLK    TOV     PTS |
+     |-----------------------------------------------|
+ 21. |  CLE   .232   31.9   6.5   2.4   13.5   104.5 |
+ 22. |  DAL   .402   35.2   6.5   4.3   14.2   108.9 |
+ 23. | DEN*   .659   34.5   7.7   4.4   13.4   110.7 |
+ 24. | DET*     .5   33.6   6.9     4   13.8     107 |
+ 25. | GSW*   .695   36.5   7.6   6.4   14.3   117.7 |
+     |-----------------------------------------------|
+ 26. | HOU*   .646   31.9   8.5   4.9   13.3   113.9 |
+ 27. | IND*   .585   33.7   8.7   4.9   13.7     108 |
+ 28. | LAC*   .585   35.8   6.8   4.7   14.5   115.1 |
+ 29. |  LAL   .451   36.4   7.5   5.4   15.7   111.8 |
+ 30. |  WAS    .39   32.7   8.3   4.6   14.1     114 |
+     +-----------------------------------------------+
+30
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. foreach var in WL  {
+  2. cap noi     histogram `var', title(dependent variable) name(`var', replace)
+  3. if _rc == 0 {
+  4.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+  5.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+  6.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+  7. }            
+  8. }
+(bin=5, start=.207, width=.105)
+(file /Users/waleed/.stata_kernel_cache/graph0.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph0.pdf written in PDF format)
+
+. foreach dfc in DRB STL BLK TOV {
+  2. cap noi     histogram `dfc', title(independent variable) name(`var', replace)
+  3. if _rc == 0 {
+  4.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+  5.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+  6.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+  7. }            
+  8. }
+(bin=5, start=31.3, width=1.82)
+(file /Users/waleed/.stata_kernel_cache/graph1.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph1.pdf written in PDF format)
+(bin=5, start=6.1, width=.64)
+(file /Users/waleed/.stata_kernel_cache/graph2.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph2.pdf written in PDF format)
+(bin=5, start=2.4, width=.8)
+(file /Users/waleed/.stata_kernel_cache/graph3.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph3.pdf written in PDF format)
+(bin=5, start=12.1, width=.98)
+(file /Users/waleed/.stata_kernel_cache/graph4.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph4.pdf written in PDF format)
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. foreach var in WL  {
+  2. cap noi     histogram `var', title(DV of Win/Loss percentage) name(`var', replace)
+  3. if _rc == 0 {
+  4.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+  5.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+  6.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+  7. }            
+  8. }
+(bin=5, start=.207, width=.105)
+(file /Users/waleed/.stata_kernel_cache/graph5.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph5.pdf written in PDF format)
+
+. foreach dfc in DRB STL BLK TOV {
+  2. cap noi     histogram `dfc', title(IV of Defensive Indicators) name(`var', replace)
+  3. if _rc == 0 {
+  4.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+  5.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+  6.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+  7. }            
+  8. }
+(bin=5, start=31.3, width=1.82)
+(file /Users/waleed/.stata_kernel_cache/graph6.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph6.pdf written in PDF format)
+(bin=5, start=6.1, width=.64)
+(file /Users/waleed/.stata_kernel_cache/graph7.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph7.pdf written in PDF format)
+(bin=5, start=2.4, width=.8)
+(file /Users/waleed/.stata_kernel_cache/graph8.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph8.pdf written in PDF format)
+(bin=5, start=12.1, width=.98)
+(file /Users/waleed/.stata_kernel_cache/graph9.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph9.pdf written in PDF format)
+
+. foreach cntrl in PTS {
+  2. cap noi     histogram `cntrl', title(Intervening Control)
+  3. if _rc == 0 {
+  4.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+  5.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+  6.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+  7. }            
+  8. }
+(bin=5, start=103.5, width=2.92)
+(file /Users/waleed/.stata_kernel_cache/graph10.svg written in SVG format)
+(file /Users/waleed/.stata_kernel_cache/graph10.pdf written in PDF format)
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. foreach x in WL DRB STL BLK TOV PTS {
+  2.     sum x, detail
+  3. }
+variable x not found
+r(111);
+r(111);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. foreach x in WL DRB STL BLK TOV PTS {
+  2.     sum `x', detail
+  3. }
+
+                            W/L%
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         .207           .207
+ 5%         .232           .232
+10%          .25           .232       Obs                  30
+25%         .402           .268       Sum of Wgt.          30
+
+50%         .506                      Mean           .4999667
+                        Largest       Std. Dev.       .146707
+75%          .61           .659
+90%         .677           .695       Variance       .0215229
+95%         .707           .707       Skewness       -.420283
+99%         .732           .732       Kurtosis       2.303499
+
+                             DRB
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         31.3           31.3
+ 5%         31.9           31.9
+10%         32.3           31.9       Obs                  30
+25%         33.7           32.7       Sum of Wgt.          30
+
+50%         34.9                      Mean           34.82333
+                        Largest       Std. Dev.      1.805296
+75%         35.8           36.4
+90%        36.45           36.5       Variance       3.259092
+95%         36.9           36.9       Skewness       .5159399
+99%         40.4           40.4       Kurtosis       4.550543
+
+                             STL
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          6.1            6.1
+ 5%          6.5            6.5
+10%         6.55            6.5       Obs                  30
+25%          6.8            6.6       Sum of Wgt.          30
+
+50%         7.55                      Mean           7.623333
+                        Largest       Std. Dev.      .8402312
+75%          8.3            8.6
+90%         8.65            8.7       Variance       .7059885
+95%            9              9       Skewness       .0660694
+99%          9.3            9.3       Kurtosis        2.02343
+
+                             BLK
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%          2.4            2.4
+ 5%            4              4
+10%          4.2            4.1       Obs                  30
+25%          4.6            4.3       Sum of Wgt.          30
+
+50%         5.05                      Mean           4.946667
+                        Largest       Std. Dev.      .7300134
+75%          5.4            5.5
+90%          5.7            5.9       Variance       .5329195
+95%          5.9            5.9       Skewness      -1.201778
+99%          6.4            6.4       Kurtosis       6.331565
+
+                             TOV
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         12.1           12.1
+ 5%         12.2           12.2
+10%        12.95           12.8       Obs                  30
+25%         13.4           13.1       Sum of Wgt.          30
+
+50%           14                      Mean           14.07667
+                        Largest       Std. Dev.      1.024084
+75%         14.7           15.1
+90%        15.35           15.6       Variance       1.048747
+95%         15.7           15.7       Skewness       .5487555
+99%           17             17       Kurtosis       3.931735
+
+                             PTS
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        103.5          103.5
+ 5%        104.5          104.5
+10%       104.75          104.6       Obs                  30
+25%        107.5          104.9       Sum of Wgt.          30
+
+50%          112                      Mean           111.2033
+                        Largest       Std. Dev.       4.09318
+75%        114.4          115.2
+90%        115.3          115.4       Variance       16.75413
+95%        117.7          117.7       Skewness      -.3579505
+99%        118.1          118.1       Kurtosis       2.063227
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. gen WLrank = 1 if WL<=.402
+(21 missing values generated)
+
+. replace WLrank = 2 if WL>.402 & WL<=.506
+(6 real changes made)
+
+. replace WLrank = 3 if WL>.506 & WL<=.61
+(8 real changes made)
+
+. replace WLrank = 4 if WL>.61
+(7 real changes made)
+
+. label define WLrankl 1 "Bottom Quartile" 2 "Lower-Middle Quartile" 3 "Upper-Middle Quartile" 4 "Top Quartile"
+
+. label value WLrank WLrankl
+
+. gen DRBrank = 1 if DRB<=33.7
+(22 missing values generated)
+
+. replace DBRrank = 2 if DRB>33.7 & DRB<=34.9
+variable DBRrank not found
+r(111);
+r(111);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. replace DRBrank = 2 if DRB>33.7 & DRB<=34.9
+(7 real changes made)
+
+. replace DRBrank = 3 if DRB>34.9 & DRB<=35.8
+(8 real changes made)
+
+. replace DRBrank = 4 if DRB>35.8 
+(7 real changes made)
+
+. label define DRBrankl 1 "Bottom Quartile" 2 "Lower-Middle Quartile" 3 "Upper-Middle Quartile" 4 "Top Quartile"
+
+. label value DRBrank DRBranl
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab WLrank DRBrank, det
+option det not allowed
+r(198);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi histogram WLrank DRBrank
+too many variables specified
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi scatter WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph11.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph11.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph WLrank DRBrank
+WLrankgraph_g.new DRBrank: class member function not found
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph dot WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph12.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph12.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi hist WLrank DRBrank
+too many variables specified
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi scatter WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph13.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph13.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph bar WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph14.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph14.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. ssc install cdfplot
+checking cdfplot consistency and verifying not already installed...
+installing into /Users/waleed/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph bar WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph15.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph15.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cdfplot WLrank DRBrank
+too many variables specified
+r(103);
+r(103);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cdfplot WLrank, by(DRBrank)
+(0 observations deleted)
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi twoway line WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph16.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph16.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi twoway connected WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph17.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph17.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. gen PTSrank = 1 if PTS<=107.5
+(22 missing values generated)
+
+. replace PTSrank = 2 if WL>107.5 & WL<=112
+(0 real changes made)
+
+. replace PTSrank = 3 if WL>112 & WL<=114.4
+(0 real changes made)
+
+. replace PTSrank = 4 if WL>114.4
+(0 real changes made)
+
+. label define PTSrankl 1 "Bottom Quartile" 2 "Lower-Middle Quartile" 3 "Upper-Middle Quartile" 4 "Top Quartile"
+
+. label value PTSrank PTSrankl
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab WLrank DRBrank, by(PTSrank)
+option by() not allowed
+r(198);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . table WLrank DRBrank, by(PTSrank)
+
+----------------------------------------
+                      |     DRBrank     
+   PTSrank and WLrank |    1     2     3
+----------------------+-----------------
+Bottom Quartile       |
+      Bottom Quartile |    3     2      
+Lower-Middle Quartile |    1           1
+Upper-Middle Quartile |                1
+----------------------------------------
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. table WLrank DRBrank, by(PTSrank)
+
+----------------------------------------
+                      |     DRBrank     
+   PTSrank and WLrank |    1     2     3
+----------------------+-----------------
+Bottom Quartile       |
+      Bottom Quartile |    3     2      
+Lower-Middle Quartile |    1           1
+Upper-Middle Quartile |                1
+----------------------------------------
+
+. by PTSrank: tab WLrank DRBrank
+not sorted
+r(5);
+r(5);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. table WLrank DRBrank, by(PTSrank)
+
+----------------------------------------
+                      |     DRBrank     
+   PTSrank and WLrank |    1     2     3
+----------------------+-----------------
+Bottom Quartile       |
+      Bottom Quartile |    3     2      
+Lower-Middle Quartile |    1           1
+Upper-Middle Quartile |                1
+----------------------------------------
+
+. bysort PTSrank: tab WLrank DRBrank
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = Bottom Quartile
+
+                      |             DRBrank
+               WLrank |         1          2          3 |     Total
+----------------------+---------------------------------+----------
+      Bottom Quartile |         3          2          0 |         5 
+Lower-Middle Quartile |         1          0          1 |         2 
+Upper-Middle Quartile |         0          0          1 |         1 
+----------------------+---------------------------------+----------
+                Total |         4          2          2 |         8 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = .
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         1          1          1          1 |         4 
+Lower-Middle Quartile |         1          2          0          1 |         4 
+Upper-Middle Quartile |         1          1          4          1 |         7 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         4          5          6          7 |        22 
+
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. gen PTSrank = 1 if PTS<=107.5
+variable PTSrank already defined
+r(110);
+r(110);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab PTSrank
+
+              PTSrank |      Freq.     Percent        Cum.
+----------------------+-----------------------------------
+      Bottom Quartile |          8      100.00      100.00
+----------------------+-----------------------------------
+                Total |          8      100.00
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. replace PTSrank = 2 if PTS>107.5 & PTS<=112
+(7 real changes made)
+
+. replace PTSrank = 3 if PTS>112 & PTS<=114.4
+(8 real changes made)
+
+. replace PTSrank = 4 if PTS>114.4
+(7 real changes made)
+
+. label define PTSrankl 1 "Bottom Quartile" 2 "Lower-Middle Quartile" 3 "Upper-Middle Quartile" 4 "Top Quartile"
+label PTSrankl already defined
+r(110);
+r(110);
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab PTSrank
+
+              PTSrank |      Freq.     Percent        Cum.
+----------------------+-----------------------------------
+      Bottom Quartile |          8       26.67       26.67
+Lower-Middle Quartile |          7       23.33       50.00
+Upper-Middle Quartile |          8       26.67       76.67
+         Top Quartile |          7       23.33      100.00
+----------------------+-----------------------------------
+                Total |         30      100.00
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. table WLrank DRBrank, by(PTSrank)
+
+----------------------------------------------
+                      |        DRBrank        
+   PTSrank and WLrank |    1     2     3     4
+----------------------+-----------------------
+Bottom Quartile       |
+      Bottom Quartile |    3     2            
+Lower-Middle Quartile |    1           1      
+Upper-Middle Quartile |                1      
+         Top Quartile |                       
+----------------------+-----------------------
+Lower-Middle Quartile |
+      Bottom Quartile |                1      
+Lower-Middle Quartile |          1           1
+Upper-Middle Quartile |    1           1     1
+         Top Quartile |          1            
+----------------------+-----------------------
+Upper-Middle Quartile |
+      Bottom Quartile |    1     1            
+Lower-Middle Quartile |    1     1            
+Upper-Middle Quartile |          1     1      
+         Top Quartile |    1           1      
+----------------------+-----------------------
+Top Quartile          |
+      Bottom Quartile |                      1
+Lower-Middle Quartile |                       
+Upper-Middle Quartile |                2      
+         Top Quartile |                      4
+----------------------------------------------
+
+. bysort PTSrank: tab WLrank DRBrank
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = Bottom Quartile
+
+                      |             DRBrank
+               WLrank |         1          2          3 |     Total
+----------------------+---------------------------------+----------
+      Bottom Quartile |         3          2          0 |         5 
+Lower-Middle Quartile |         1          0          1 |         2 
+Upper-Middle Quartile |         0          0          1 |         1 
+----------------------+---------------------------------+----------
+                Total |         4          2          2 |         8 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = Lower-Middle Quartile
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         0          0          1          0 |         1 
+Lower-Middle Quartile |         0          1          0          1 |         2 
+Upper-Middle Quartile |         1          0          1          1 |         3 
+         Top Quartile |         0          1          0          0 |         1 
+----------------------+--------------------------------------------+----------
+                Total |         1          2          2          2 |         7 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = Upper-Middle Quartile
+
+                      |             DRBrank
+               WLrank |         1          2          3 |     Total
+----------------------+---------------------------------+----------
+      Bottom Quartile |         1          1          0 |         2 
+Lower-Middle Quartile |         1          1          0 |         2 
+Upper-Middle Quartile |         0          1          1 |         2 
+         Top Quartile |         1          0          1 |         2 
+----------------------+---------------------------------+----------
+                Total |         3          3          2 |         8 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> PTSrank = Top Quartile
+
+                      |        DRBrank
+               WLrank |         3          4 |     Total
+----------------------+----------------------+----------
+      Bottom Quartile |         0          1 |         1 
+Upper-Middle Quartile |         2          0 |         2 
+         Top Quartile |         0          4 |         4 
+----------------------+----------------------+----------
+                Total |         2          5 |         7 
+
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph bar WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph18.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph18.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. cap noi twoway connected WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph19.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph19.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. table WLrank DRBrank, by(PTSrank)
+
+----------------------------------------------
+                      |        DRBrank        
+   PTSrank and WLrank |    1     2     3     4
+----------------------+-----------------------
+Bottom Quartile       |
+      Bottom Quartile |    3     2            
+Lower-Middle Quartile |    1           1      
+Upper-Middle Quartile |                1      
+         Top Quartile |                       
+----------------------+-----------------------
+Lower-Middle Quartile |
+      Bottom Quartile |                1      
+Lower-Middle Quartile |          1           1
+Upper-Middle Quartile |    1           1     1
+         Top Quartile |          1            
+----------------------+-----------------------
+Upper-Middle Quartile |
+      Bottom Quartile |    1     1            
+Lower-Middle Quartile |    1     1            
+Upper-Middle Quartile |          1     1      
+         Top Quartile |    1           1      
+----------------------+-----------------------
+Top Quartile          |
+      Bottom Quartile |                      1
+Lower-Middle Quartile |                       
+Upper-Middle Quartile |                2      
+         Top Quartile |                      4
+----------------------------------------------
+
+. cap noi graph bar WLrank DRBrank, by(PTSrank)
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph20.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph20.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tab WLrank DRBrank
+
+                      |                   DRBrank
+               WLrank |         1          2          3          4 |     Total
+----------------------+--------------------------------------------+----------
+      Bottom Quartile |         4          3          1          1 |         9 
+Lower-Middle Quartile |         2          2          1          1 |         6 
+Upper-Middle Quartile |         1          1          5          1 |         8 
+         Top Quartile |         1          1          1          4 |         7 
+----------------------+--------------------------------------------+----------
+                Total |         8          7          8          7 |        30 
+
+. cap noi graph bar WLrank DRBrank
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph21.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph21.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. 
