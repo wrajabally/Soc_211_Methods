@@ -1,0 +1,490 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/waleed/Desktop/Soc_211_Methods/Week5_assignmentlog.log
+  log type:  text
+ opened on:  26 Feb 2020, 03:23:15
+
+. import delimited "/Users/waleed/Documents/NBAstats_18-19_complete.csv", varn(1)
+(33 vars, 31 obs)
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . describe
+
+Contains data
+  obs:            31                          
+ vars:            33                          
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ïrk             byte    %8.0g                 ï»¿Rk
+team            str23   %23s                  Team
+g               byte    %8.0g                 G
+mp              float   %9.0g                 MP
+fg              float   %9.0g                 FG
+fga             float   %9.0g                 FGA
+v7              float   %9.0g                 FG%
+p               float   %9.0g                 3P
+pa              float   %9.0g                 3PA
+v10             float   %9.0g                 3P%
+v11             float   %9.0g                 2P
+v12             float   %9.0g                 2PA
+v13             float   %9.0g                 2P%
+ft              float   %9.0g                 FT
+fta             float   %9.0g                 FTA
+v16             float   %9.0g                 FT%
+orb             float   %9.0g                 ORB
+drb             float   %9.0g                 DRB
+trb             float   %9.0g                 TRB
+ast             float   %9.0g                 AST
+stl             float   %9.0g                 STL
+blk             float   %9.0g                 BLK
+tov             float   %9.0g                 TOV
+pf              float   %9.0g                 PF
+pts             float   %9.0g                 PTS
+efg             float   %9.0g                 eFG%
+v27             float   %9.0g                 TOV%
+v28             float   %9.0g                 ORB%
+ftfga           float   %9.0g                 FT/FGA
+w               byte    %8.0g                 W
+l               byte    %8.0g                 L
+sos             float   %9.0g                 SOS
+pace            float   %9.0g                 Pace
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . rename (v27 v28) (tov_prcnt orb_prcnt)
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. sum efg tov_prcnt orb_prcnt ftfga
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+         efg |         30    .5241667    .0152453        .49       .565
+   tov_prcnt |         30        12.4    .7781499       10.9       14.3
+   orb_prcnt |         30    22.88667    1.865427       19.4       26.6
+       ftfga |         30       .1983    .0202453       .168       .258
+
+. gen tovrate = tov_prcnt/100
+(1 missing value generated)
+
+. gen orbprcnt = orb_prcnt/100
+(1 missing value generated)
+
+. gen fourfactor = (.4 * efg) + (.25 * tovrate) + (.2 * orbprcnt) + (.15 * ftfga)
+(1 missing value generated)
+
+. tab fourfactor
+
+ fourfactor |      Freq.     Percent        Cum.
+------------+-----------------------------------
+     .30015 |          1        3.33        3.33
+     .30195 |          1        3.33        6.67
+     .30615 |          1        3.33       10.00
+     .30695 |          1        3.33       13.33
+       .307 |          1        3.33       16.67
+     .30715 |          1        3.33       20.00
+      .3111 |          1        3.33       23.33
+      .3114 |          1        3.33       26.67
+      .3115 |          1        3.33       30.00
+      .3122 |          1        3.33       33.33
+      .3132 |          1        3.33       36.67
+      .3136 |          1        3.33       40.00
+      .3141 |          1        3.33       43.33
+     .31415 |          1        3.33       46.67
+     .31535 |          1        3.33       50.00
+      .3157 |          1        3.33       53.33
+     .31635 |          1        3.33       56.67
+     .31715 |          1        3.33       60.00
+     .31975 |          1        3.33       63.33
+        .32 |          1        3.33       66.67
+     .32025 |          1        3.33       70.00
+     .32115 |          1        3.33       73.33
+      .3217 |          1        3.33       76.67
+     .32275 |          1        3.33       80.00
+     .32555 |          1        3.33       83.33
+     .32605 |          1        3.33       86.67
+     .32615 |          1        3.33       90.00
+     .32705 |          1        3.33       93.33
+      .3298 |          1        3.33       96.67
+      .3302 |          1        3.33      100.00
+------------+-----------------------------------
+      Total |         30      100.00
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. gen fourfactorRnk = 1 if fourfactor<=.3122
+(21 missing values generated)
+
+. replace fourfactorRnk = 2 if fourfactor>.3122 & fourfactor<=.32
+(10 real changes made)
+
+. replace fourfactorRnk = 3 if fourfactor>.32
+(11 real changes made)
+
+. label define fourfactorRnkl 1 "Bottom Third" 2 "Middle Third" 3 "Upper Third" 
+
+. label value fourfactorRnk fourfactorRnkl
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . tab fourfactor fourfactorRnk
+
+           |          fourfactorRnk
+fourfactor | Bottom Th  Middle Th  Upper Thi |     Total
+-----------+---------------------------------+----------
+    .30015 |         1          0          0 |         1 
+    .30195 |         1          0          0 |         1 
+    .30615 |         1          0          0 |         1 
+    .30695 |         1          0          0 |         1 
+      .307 |         1          0          0 |         1 
+    .30715 |         1          0          0 |         1 
+     .3111 |         1          0          0 |         1 
+     .3114 |         1          0          0 |         1 
+     .3115 |         1          0          0 |         1 
+     .3122 |         1          0          0 |         1 
+     .3132 |         0          1          0 |         1 
+     .3136 |         0          1          0 |         1 
+     .3141 |         0          1          0 |         1 
+    .31415 |         0          1          0 |         1 
+    .31535 |         0          1          0 |         1 
+     .3157 |         0          1          0 |         1 
+    .31635 |         0          1          0 |         1 
+    .31715 |         0          1          0 |         1 
+    .31975 |         0          1          0 |         1 
+       .32 |         0          1          0 |         1 
+    .32025 |         0          0          1 |         1 
+    .32115 |         0          0          1 |         1 
+     .3217 |         0          0          1 |         1 
+    .32275 |         0          0          1 |         1 
+    .32555 |         0          0          1 |         1 
+    .32605 |         0          0          1 |         1 
+    .32615 |         0          0          1 |         1 
+    .32705 |         0          0          1 |         1 
+     .3298 |         0          0          1 |         1 
+     .3302 |         0          0          1 |         1 
+-----------+---------------------------------+----------
+     Total |        10         10         10 |        30 
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (bar w fourfactorRnk) (rcap w sos fourfactorRnk), title("Wins compared with the Four Factor Measure, 2018-2019") xlabel(1 "Lower Third" 2 "Middle Third" 3 "Upper Third") ytitle("Number of Wins 2018-2019") xtitle("Rank of Four Factor Measu
+> re")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(file /Users/waleed/.stata_kernel_cache/graph46.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph46.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (bar w fourfactorRnk) (rcap w sos fourfactorRnk), title("Wins compared with the Four Factor Measure according to SOS, 2018-2019") xlabel(1 "Lower Third" 2 "Middle Third" 3 "Upper Third") ytitle("Number of Wins 2018-2019") xtitle("Rank of 
+> Four Factor Measure")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(note: file /Users/waleed/.stata_kernel_cache/graph47.svg not found)
+(file /Users/waleed/.stata_kernel_cache/graph47.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph47.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (bar w fourfactorRnk) (rcap w sos fourfactorRnk), title("Wins compared with the Four Factor Measure according to SOS, 2018-2019", size(medium)) xlabel(1 "Lower Third" 2 "Middle Third" 3 "Upper Third") ytitle("Number of Wins 2018-2019") xt
+> itle("Rank of Four Factor Measure")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(note: file /Users/waleed/.stata_kernel_cache/graph48.svg not found)
+(file /Users/waleed/.stata_kernel_cache/graph48.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph48.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (bar w fourfactorRnk) (rcap w sos fourfactorRnk), title("Wins compared with the Four Factor Measure according to SOS, '18-'19", size(medium)) xlabel(1 "Lower Third" 2 "Middle Third" 3 "Upper Third") ytitle("Number of Wins 2018-2019") xtit
+> le("Rank of Four Factor Measure")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(note: file /Users/waleed/.stata_kernel_cache/graph49.svg not found)
+(file /Users/waleed/.stata_kernel_cache/graph49.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph49.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (bar w fourfactorRnk) (rcap w sos fourfactorRnk), title("Wins compared with the Four Factor Measure according to SOS, '18-'19", size(medium)) xlabel(1 "Bottom Third" 2 "Middle Third" 3 "Top Third") ytitle("Number of Wins 2018-2019") xtitl
+> e("Rank of Four Factor Measure")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(note: file /Users/waleed/.stata_kernel_cache/graph50.svg not found)
+(file /Users/waleed/.stata_kernel_cache/graph50.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph50.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. reg w fourfactor
+
+      Source |       SS           df       MS      Number of obs   =        30
+-------------+----------------------------------   F(1, 28)        =     22.18
+       Model |  1854.69489         1  1854.69489   Prob > F        =    0.0001
+    Residual |  2341.30511        28  83.6180396   R-squared       =    0.4420
+-------------+----------------------------------   Adj R-squared   =    0.4221
+       Total |        4196        29  144.689655   Root MSE        =    9.1443
+
+------------------------------------------------------------------------------
+           w |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  fourfactor |   1001.159   212.5772     4.71   0.000      565.714    1436.603
+       _cons |  -275.5513   67.23445    -4.10   0.000    -413.2749   -137.8278
+------------------------------------------------------------------------------
+
+. reg w fourfactor sos pace
+
+      Source |       SS           df       MS      Number of obs   =        30
+-------------+----------------------------------   F(3, 26)        =     14.30
+       Model |  2612.94101         3  870.980338   Prob > F        =    0.0000
+    Residual |  1583.05899        26  60.8868841   R-squared       =    0.6227
+-------------+----------------------------------   Adj R-squared   =    0.5792
+       Total |        4196        29  144.689655   Root MSE        =     7.803
+
+------------------------------------------------------------------------------
+           w |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+  fourfactor |   1020.493   199.3565     5.12   0.000     610.7103    1430.277
+         sos |  -12.02273   3.782072    -3.18   0.004    -19.79689   -4.248568
+        pace |  -1.095237   .7384035    -1.48   0.150    -2.613047    .4225735
+       _cons |   -172.137   76.33199    -2.26   0.033    -329.0396   -15.23433
+------------------------------------------------------------------------------
+
+. reg w efg tov_prcnt orb_prcnt ftfga sos pace
+
+      Source |       SS           df       MS      Number of obs   =        30
+-------------+----------------------------------   F(6, 23)        =     18.43
+       Model |  3473.54179         6  578.923631   Prob > F        =    0.0000
+    Residual |  722.458213        23  31.4112267   R-squared       =    0.8278
+-------------+----------------------------------   Adj R-squared   =    0.7829
+       Total |        4196        29  144.689655   Root MSE        =    5.6046
+
+------------------------------------------------------------------------------
+           w |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         efg |   587.3526   79.36054     7.40   0.000     423.1828    751.5224
+   tov_prcnt |  -3.554276   1.428606    -2.49   0.021    -6.509573   -.5989789
+   orb_prcnt |   1.945999   .5642638     3.45   0.002     .7787305    3.113268
+       ftfga |   86.00892   53.04453     1.62   0.119    -23.72204    195.7399
+         sos |  -6.599952   3.013061    -2.19   0.039    -12.83294   -.3669606
+        pace |  -.7788768   .5450703    -1.43   0.166    -1.906441    .3486871
+       _cons |  -206.4942   55.76877    -3.70   0.001    -321.8607   -91.12771
+------------------------------------------------------------------------------
+
+. . include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. . cap noi twoway (scatter w fourfactor) (lfit w fourfactor), title("Wins compared with the Four Factor Measure, '18-'19", size(medium)) ytitle("Number of Wins 2018-2019") xtitle("Four Factor Measure")
+
+. if _rc == 0 {
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.svg, width(600) replace
+(note: file /Users/waleed/.stata_kernel_cache/graph51.svg not found)
+(file /Users/waleed/.stata_kernel_cache/graph51.svg written in SVG format)
+.     noi gr export /Users/waleed/.stata_kernel_cache/graph$stata_kernel_graph_counter.pdf, replace
+(file /Users/waleed/.stata_kernel_cache/graph51.pdf written in PDF format)
+.     global stata_kernel_graph_counter = $stata_kernel_graph_counter + 1
+. }            
+
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. tempname __user_rc
+
+. local `__user_rc' = _rc
+
+. 
+. include /Users/waleed/.stata_kernel_cache/include.do
+
+. _StataKernelResetRC, num(``__user_rc'')
+
+. macro drop _`__user_rc'
+
+. macro drop ___user_rc
+
+. 
