@@ -1,0 +1,142 @@
+-------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/waleed/Documents/Waleed-Soc211/problemset4.log
+  log type:  text
+ opened on:   1 Apr 2020, 11:17:02
+
+. use "/Users/waleed/Documents/Waleed-Soc211/MoveinVariable_SanJose2_datafile.dta"
+
+. keep if year==2012
+(378,817 observations deleted)
+
+. keep if substr(string(puma), 1, 1) == "6"
+(328,697 observations deleted)
+
+. 
+. *Question 1
+. 
+. tw (scatter movedin poverty) (lfitci movedin poverty), ytitle(Number of years resided in the area, size(large)) ///
+> xtitle(Poverty Level,size(large)) legend(off) scheme(538w) title("How does variance in Y change as X increases?" " ", span si
+> ze(large)) ///
+> aspect(1, place(west))
+
+. 
+. *Question 2
+. quietly regress movedin poverty
+
+. estat hettest 
+
+Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+         Variables: fitted values of movedin
+
+         chi2(1)      =   750.15
+         Prob > chi2  =   0.0000
+
+. 
+. gen movedinln=log(movedin)
+(25,192 missing values generated)
+
+. quietly regress movedin poverty
+
+. estat hettest
+
+Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+         Variables: fitted values of movedin
+
+         chi2(1)      =   750.15
+         Prob > chi2  =   0.0000
+
+. 
+. gen povertyln=log(poverty)
+(976 missing values generated)
+
+. quietly regress movedin poverty
+
+. estat hettest
+
+Breusch-Pagan / Cook-Weisberg test for heteroskedasticity 
+         Ho: Constant variance
+         Variables: fitted values of movedin
+
+         chi2(1)      =   750.15
+         Prob > chi2  =   0.0000
+
+. 
+. *Question 3
+. 
+. /*quietly reg movedin poverty
+> quietly eststo
+> quietly bootstrap _b[poverty] , rep(1000) nodots : ///
+>    reg movedin poverty
+> quietly eststo
+> esttab */
+. 
+. bootstrap _b[poverty] , rep(1000) nodots : reg movedin poverty
+
+Linear regression                               Number of obs     =     39,350
+                                                Replications      =      1,000
+
+      command:  regress movedin poverty
+        _bs_1:  _b[poverty]
+
+------------------------------------------------------------------------------
+             |   Observed   Bootstrap                         Normal-based
+             |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _bs_1 |   .0017525   .0000574    30.53   0.000       .00164    .0018651
+------------------------------------------------------------------------------
+
+. 
+. *Question 4
+. /*
+> quietly reg movedin poverty, ro
+> quietly eststo
+> esttab
+> */
+. 
+. reg movedin poverty, ro
+
+Linear regression                               Number of obs     =     39,350
+                                                F(1, 39348)       =     866.70
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0203
+                                                Root MSE          =     2.0929
+
+------------------------------------------------------------------------------
+             |               Robust
+     movedin |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     poverty |   .0017525   .0000595    29.44   0.000     .0016359    .0018692
+       _cons |    .881354   .0179724    49.04   0.000     .8461277    .9165803
+------------------------------------------------------------------------------
+
+. 
+. *Question 5
+. 
+. /*
+> qui reg movedin poverty, cluster(puma)
+> quietly eststo
+> esttab
+> */
+. reg movedin poverty, cluster(puma)
+
+Linear regression                               Number of obs     =     39,350
+                                                F(1, 29)          =     187.16
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.0203
+                                                Root MSE          =     2.0929
+
+                                  (Std. Err. adjusted for 30 clusters in puma)
+------------------------------------------------------------------------------
+             |               Robust
+     movedin |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+     poverty |   .0017525   .0001281    13.68   0.000     .0014905    .0020145
+       _cons |    .881354   .0573415    15.37   0.000     .7640775    .9986306
+------------------------------------------------------------------------------
+
+. 
+end of do-file
+
